@@ -293,6 +293,10 @@ public class NonBlockingSession implements Session {
             }
         }
 
+        if (rrs.getSqlType() == ServerParse.DDL) {
+            this.commit();
+        }
+
         RouteResultsetNode[] nodes = rrs.getNodes();
         if (nodes == null || nodes.length == 0 || nodes[0].getName() == null || nodes[0].getName().equals("")) {
             if (rrs.isNeedOptimizer()) {
